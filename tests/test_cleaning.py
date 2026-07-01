@@ -117,6 +117,21 @@ def test_handle_missing_fill(sample_df_with_missing):
     assert result['name'].notna().all() or (result['name'] == 0).any()
     assert result['value'].notna().all()
 
+def test_handle_missing_forward_fill(sample_df_with_missing):
+    """Test filling missing values."""
+    result = handle_missing_values(
+        sample_df_with_missing, 
+        strategy='forward_fill', 
+        fill_value=0
+    )
+
+    # Should have all 4 rows
+    assert len(result) == 4
+    # No missing values
+    assert result['name'].notna().all() or (result['name'] == 0).any()
+    assert result['value'].notna().all()
+    assert result["value"][2] == 20
+
 def test_handle_missing_invalid_strategy(sample_df_with_missing):
     """Test that invalid strategy raises error."""
     with pytest.raises(ValueError, match="Unknown strategy"):
