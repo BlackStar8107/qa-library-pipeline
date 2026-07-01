@@ -87,9 +87,9 @@ def load_excel(filepath, sheet_name=0, **kwargs):
     except ValueError as e:
         logger.error(f"Value error loading Excel {filepath}: {e}")
         raise
-    except ImportError as e:
+    except ImportError as e: # pragma: no cover
         logger.error(f"Missing Excel engine for {filepath}: {e}")
         raise
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         logger.error(f"Error loading Excel {filepath}: {e}")
         raise
